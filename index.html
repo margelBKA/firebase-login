@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD0q1lc1l-UmO9eJV-V4jOvfpV42f602XE",
+            authDomain: "fir-login-824f5.firebaseapp.com",
+            databaseURL: "https://fir-login-824f5.firebaseio.com",
+            projectId: "fir-login-824f5",
+            storageBucket: "",
+            messagingSenderId: "890646231350"
+        };
+        firebase.initializeApp(config);
+    </script>
+</head>
+<body>
+test
+<script>
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    firebase.auth().languageCode = 'en';
+    provider.setCustomParameters({
+        'login_hint': 'evaldas@taroza.lt'
+    });
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+        console.log("signin");
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // ...
+    }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+        console.log(errorMessage);
+    });
+</script>
+</body>
+</html>
